@@ -44,9 +44,12 @@ static void check_cb(uv_check_t* handle) {
 
 
 TEST_IMPL(async_null_cb) {
-  // fill async_handle with garbage values
-  // uv_async_init initialize struct fields
-  // this is to verify padding between fields does not change behavior
+  /*
+   * Fill async_handle with garbage values.
+   * uv_async_init() should properly initialize struct fields regardless of
+   * initial values.
+   * This is added to verify paddings between fields do not affect behavior.
+   */
   memset(&async_handle, 0xff, sizeof(async_handle));
 
   ASSERT(0 == uv_async_init(uv_default_loop(), &async_handle, NULL));
