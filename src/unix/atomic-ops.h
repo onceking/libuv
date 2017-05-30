@@ -51,7 +51,7 @@ UV_UNUSED(static int cmpxchgi(int* ptr, int oldval, int newval)) {
 #elif defined(__SUNPRO_C) || defined(__SUNPRO_CC)
   return atomic_cas_uint(ptr, oldval, newval);
 #else
-#error "Missing compare-and-swap implementation."
+  return __sync_val_compare_and_swap(ptr, oldval, newval);
 #endif
 }
 
@@ -87,7 +87,7 @@ UV_UNUSED(static long cmpxchgl(long* ptr, long oldval, long newval)) {
 #elif defined(__SUNPRO_C) || defined(__SUNPRO_CC)
   return atomic_cas_ulong(ptr, oldval, newval);
 #else
-#error "Missing compare-and-swap implementation."
+  return __sync_val_compare_and_swap(ptr, oldval, newval);
 #endif
 }
 
